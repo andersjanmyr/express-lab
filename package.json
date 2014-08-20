@@ -1,0 +1,23 @@
+{
+  "name": "express-lab",
+  "version": "0.1.0",
+  "description": "A lab for learning how to create a JSON API with Express.",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andersjanmyr/express-lab.git"
+  },
+  "keywords": [
+    "Lab",
+    "Express"
+  ],
+  "author": "Anders Janmyr <anders@janmyr.com> (http://anders.janmyr.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andersjanmyr/express-lab/issues"
+  },
+  "homepage": "https://github.com/andersjanmyr/express-lab"
+}
