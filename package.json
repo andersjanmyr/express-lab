@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/andersjanmyr/express-lab/issues"
   },
-  "homepage": "https://github.com/andersjanmyr/express-lab"
+  "homepage": "https://github.com/andersjanmyr/express-lab",
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4",
+    "nodemon": "^1.2.1",
+    "sinon": "^1.10.3",
+    "supertest": "^0.13.0"
+  }
 }
