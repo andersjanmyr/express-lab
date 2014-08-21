@@ -25,14 +25,29 @@
     "url": "https://github.com/andersjanmyr/express-lab/issues"
   },
   "homepage": "https://github.com/andersjanmyr/express-lab",
+  "jshintConfig": {
+    "curly": false,
+    "indent": 4,
+    "trailing": true,
+    "maxparams": 4,
+    "maxdepth": 2,
+    "maxcomplexity": 6,
+    "node": true,
+    "globals": {
+      "describe": true,
+      "before": true,
+      "it": true
+    }
+  },
+  "dependencies": {
+    "debug": "^1.0.4",
+    "express": "^4.8.5"
+  },
   "devDependencies": {
     "chai": "^1.9.1",
     "mocha": "^1.21.4",
     "nodemon": "^1.2.1",
     "sinon": "^1.10.3",
     "supertest": "^0.13.0"
-  },
-  "dependencies": {
-    "express": "^4.8.5"
   }
 }
