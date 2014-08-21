@@ -4,7 +4,12 @@
   "description": "A lab for learning how to create a JSON API with Express.",
   "main": "server.js",
   "scripts": {
-    "test": "mocha test"
+    "start": "node server.js",
+    "watch-server": "nodemon server.js",
+    "debug": "node --debug-brk server.js",
+    "test": "mocha test/**",
+    "test-debug": "mocha test/** --debug-brk",
+    "test-watch": "mocha test/** --watch"
   },
   "repository": {
     "type": "git",
