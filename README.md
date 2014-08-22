@@ -14,8 +14,9 @@ $ npm install
 
 ## Running
 
+
+### Verify that everything is working
 ```
-# Verify that everything is working
 $ npm test
 
 > express-lab@0.1.0 test /Users/andersjanmyr/Projects/express-lab
@@ -30,14 +31,16 @@ $ npm test
     ✓ verifies the test setup (async) (202ms)
 
   3 passing (240ms)
+```
 
-
-# Start a test watcher
+### Start a test watcher
+```
 $ npm run test-watch
 ...
+```
 
-
-# Start a server
+### Start a server
+```
 $ npm start
 
 > express-lab@0.1.0 start /Users/andersjanmyr/Projects/express-lab
@@ -46,9 +49,10 @@ $ npm start
 DEVELOPMENT server started
 Port: 3000
 URL: http://localhost:3000
+```
 
-
-# Start a server with file watching
+### Start a server with file watching
+```
 $ npm run watch
 ```
 
@@ -131,7 +135,7 @@ implementing the test. Copy the status test if you need a start.
   id: 'fbr',
   title: 'Fooled by Randomness',
   author: 'Nicholas Taleb'
-}
+}]
 ```
 
 ### 6. Extract the book model
@@ -175,7 +179,7 @@ book.
 
 ### 13. Change the model to async mode.
 
-Change all the modle function to async instead and change the tests and the
+Change all the model function to async instead and change the tests and the
 calls to them
 
 ```
@@ -189,17 +193,16 @@ function find(filter) {
 res.send(books.find(filter));
 
 
-
 // To async
 function find(filter, callback) {
   ...
-  process.nextTick(callback.bind(null, null, books))
+  process.nextTick(callback.bind(null, null, books));
 }
 
 // Async call
 books.find(filter, function(err, data) {
   res.send(data);
-});;
+});
 ```
 
 
@@ -215,7 +218,7 @@ to the model, we do this with `mongoskin`
 
 ### Install Mongo DB
 
-Google it if you don't already have it.
+Follow the [installations instructions](http://docs.mongodb.org/manual/installation/) unless you don't already have it.
 
 ### 1. Install mongoskin
 
@@ -226,8 +229,8 @@ $ npm install mongoskin --save
 ### 2. Connect to a DB with mongoskin
 
 ```
-// In server.js start method
-var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true})
+// In server.js start() method
+var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true});
 
 app.set('db', db);
 ```
@@ -271,7 +274,3 @@ module.exports = BookMongo;
 
 Copy `test/model/book-test.js` to `test/model/book-mongo-test.js`
 and change it to test `book-mongo` instead.
-
-
-
-
