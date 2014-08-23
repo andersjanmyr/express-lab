@@ -3,13 +3,17 @@
 var debug = require('debug')('express-lab:server');
 var http = require('http');
 
+function environment() {
+    return process.env.NODE_ENV || 'development';
+}
+
 function isProduction() {
-    return process.env.NODE_ENV === 'production';
+    return environment() === 'production';
 }
 
 var app = require('./lib/app');
 
-// Make sure a proper exceptions is logged on exit
+// Make sure uncaught exceptions are logged on exit
 process.on('uncaughtException', function(err) {
     console.log("Uncaught exception", err, err.stack);
     process.exit(1);
@@ -33,7 +37,7 @@ function start() {
 
     printRoutes();
     server.listen(port, function() {
-        console.log(process.env.NODE_ENV.toUpperCase() + ' server started');
+        console.log(environment().toUpperCase() + ' server started');
         console.log('Port:', port);
         console.log('URL:', 'http://localhost:' + port);
     });
