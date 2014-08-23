@@ -158,6 +158,19 @@ implementing the test. Copy the status test if you need a start.
 
 Put it in `lib/model/book.js`. Return the list from a `find`-function.
 
+Example:
+```
+var books = [books...]
+
+function find() {
+  return books;
+}
+
+module.exports = {
+  find: find
+};
+```
+
 ### 7. Add a method for getting a book by id
 
 Call the function `findById(id)`. Get the book from the array.
