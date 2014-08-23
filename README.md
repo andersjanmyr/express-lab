@@ -194,12 +194,14 @@ It should be possible to free text filter in title and author.
 * Change the route that gets all the books to support a filter. The route
   `/books?filter=the` should return 2 books.
 
-### 10. Add support for `DELETE /books/bof`
+Use `req.param('filter')` to get the filter query parameter value.
+
+### 10. Add support for `DELETE /books/:id`
 
 This deletes the book from the in memory collection.
 
 
-### 11. Add support for `PUT /books/bof`
+### 11. Add support for `PUT /books/:id`
 
 This updates the book from the in memory collection.  You may need to add
 the `body-parser` middleware for this`
