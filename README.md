@@ -51,6 +51,20 @@ Port: 3000
 URL: http://localhost:3000
 ```
 
+If you want to start a sever on a different port or in production mode, you can
+do this by setting environment variables or adding them on command line.
+
+```
+$ NODE_ENV=production PORT=8080 npm start
+
+> express-lab@0.1.0 start /Users/andersjanmyr/Projects/express-lab
+> node server.js
+
+PRODUCTION server started
+Port: 8080
+URL: http://localhost:8080
+```
+
 ### Start a server with file watching
 ```
 $ npm run watch
