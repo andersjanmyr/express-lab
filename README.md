@@ -171,6 +171,9 @@ module.exports = {
 };
 ```
 
+Don't forget to create test too. Put it in `test/model/book-test.js`.
+
+
 ### 7. Add a method for getting a book by id
 
 Call the function `findById(id)`. Get the book from the array.
