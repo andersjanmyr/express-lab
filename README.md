@@ -95,13 +95,14 @@ express-lab
 ### 1. Start the server in `watch` mode and verify that status works
 
 Verify by browsing to the URL that is output by the server. Don't shut the
-server down it should be running all time.
+server down it should be running all time. *When new files are added, the
+watcher needs to be restarted*
 
 ### 2. Start a test watcher
 
 The test watcher should also be running all the time. Modify the tests to
 verify that they fail if the expectations are changed. Fix them again.
-
+ *When new files are added, the watcher needs to be restarted*
 
 ### 3. Install and configure middleware for logging
 
@@ -121,7 +122,8 @@ app.use(morgan('dev'));
 ### 4. Create a new route, `lib/routes/books.js`
 
 Also create the accompanying test, `test/routes/books-test.js`. The server
-should serve the list of books on `/books`.
+should serve the list of books on `/books`. *When new files are added, the
+watcher needs to be restarted*
 
 ### 5. Implement the test and the service for getting all books
 
