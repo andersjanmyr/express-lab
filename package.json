@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "watch-server": "nodemon server.js",
+    "watch": "nodemon server.js",
     "debug": "node --debug-brk server.js",
     "test": "mocha test/**",
     "test-debug": "mocha test/** --debug-brk",
