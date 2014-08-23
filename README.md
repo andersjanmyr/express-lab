@@ -204,7 +204,17 @@ This deletes the book from the in memory collection.
 ### 11. Add support for `PUT /books/:id`
 
 This updates the book from the in memory collection.  You may need to add
-the `body-parser` middleware for this`
+the `body-parser` middleware for this` `npm install body-parser --save`.
+
+```
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json();
+```
+
+*Add the `body-parser`-middleware before you your routes. Middleware is added
+to a list and is traversed in the order it is added.
+
 
 ### 12. Add support for `POST /books`
 
