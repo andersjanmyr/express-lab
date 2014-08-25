@@ -16,6 +16,7 @@ $ npm install
 
 
 ### Verify that everything is working
+
 ```
 $ npm test
 
@@ -34,12 +35,14 @@ $ npm test
 ```
 
 ### Start a test watcher
+
 ```
 $ npm run test-watch
 ...
 ```
 
 ### Start a server
+
 ```
 $ npm start
 
@@ -66,6 +69,7 @@ URL: http://localhost:8080
 ```
 
 ### Start a server with file watching
+
 ```
 $ npm run watch
 ```
@@ -250,7 +254,7 @@ books.find(filter, function(err, data) {
 ```
 
 
-### 14 Optional! Deploy the application to Heroku
+### 14. Optional! Deploy the application to Heroku
 
 If you want to you may deploy your application to Heroku. Follow their
 [instructions for getting started](https://devcenter.heroku.com/articles/getting-started-with-nodejs).
