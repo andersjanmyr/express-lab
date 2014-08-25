@@ -74,6 +74,26 @@ URL: http://localhost:8080
 $ npm run watch
 ```
 
+### Debugging
+
+Debugging the code can be done with the help of `node-inspector`. This allows
+you to debug the code with the Chrome developer tools.
+
+```
+$ npm install -g node-inspector # Install node-inspector globally
+
+$ node-inspector & # Start the inspector (&) in the background
+Node Inspector v0.7.4
+Visit http://127.0.0.1:8080/debug?port=5858 to start debugging.
+
+$ npm run debug # Start debugging the server
+
+$ npm run debug-test # Start debugging the tests
+```
+
+Open the link that is output by `node-inspector` in Chrome to debug.
+
+
 ## Lab Instructions
 
 The lab structure looks like below.
