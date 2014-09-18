@@ -88,7 +88,7 @@ Visit http://127.0.0.1:8080/debug?port=5858 to start debugging.
 
 $ npm run debug # Start debugging the server
 
-$ npm run debug-test # Start debugging the tests
+$ npm run test-debug # Start debugging the tests
 ```
 
 Open the link that is output by `node-inspector` in Chrome to debug.
