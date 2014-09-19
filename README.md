@@ -287,7 +287,9 @@ to the model, we do this with `mongoskin`
 
 ### Install Mongo DB
 
-Follow the [installations instructions](http://docs.mongodb.org/manual/installation/) unless you don't already have it.
+Follow the [installations instructions](http://docs.mongodb.org/manual/installation/) if you don't already have it.
+
+Make sure `mongo` is started!
 
 ### 1. Install mongoskin
 
