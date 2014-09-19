@@ -264,6 +264,7 @@ res.send(books.find(filter));
 // To async
 function find(filter, callback) {
   ...
+  // Call the callback on next iteration with this=null, err=null, data=books
   process.nextTick(callback.bind(null, null, books));
 }
 
