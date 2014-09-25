@@ -6,6 +6,7 @@ var sinon = require('sinon');
 var book = require('../../lib/models/book');
 
 describe('book', function() {
+
     describe('#find', function() {
         it('finds the matching books', function(done) {
             book.find('the', function(err, books) {
@@ -84,7 +85,7 @@ describe('book', function() {
             });
         });
         it('calls back with error if book missing', function(done) {
-            book.del({id: 'missing'}, function(err) {
+            book.update({id: 'missing'}, function(err) {
                 expect(err).to.equal('Book not found, id: missing');
                 done();
             });
@@ -98,6 +99,10 @@ describe('book', function() {
                 });
             });
         });
+    });
+
+    after(function() {
+        book.reset();
     });
 });
 
