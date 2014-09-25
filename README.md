@@ -337,7 +337,7 @@ $ npm install mongoskin --save
 
 ```
 // In server.js start() method
-var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true});
+var db = mongoskin.db('mongodb://@localhost:27017/express-lab-test', {safe:true});
 
 app.set('db', db);
 ```
@@ -352,7 +352,7 @@ function BookMongo(db) {
   this.db = db;
 }
 
-BookMongo.prototype.find = function find(filter) {
+BookMongo.prototype.find = function find(filter, callback) {
 }
 ...
 
@@ -370,7 +370,7 @@ function bookMongo(database) {
   }
 }
 
-function find(filter) {
+function find(filter, callback) {
 ...
 }
 
@@ -382,4 +382,93 @@ module.exports = BookMongo;
 Copy `test/models/book-test.js` to `test/models/book-mongo-test.js`
 and change it to test `book-mongo` instead.
 
+Here are a couple of skeleton files to get going
+```js
+// test/models/book-mongo-test.js
+'use strict';
+
+var expect = require('chai').expect;
+var sinon = require('sinon');
+var mongoskin = require('mongoskin');
+
+var MongoBook = require('../../lib/models/mongo-book');
+
+var db = mongoskin.db('mongodb://@localhost:27017/express-lab-test', {safe:true});
+
+// Example books
+var seed = [{
+    title: 'Gödel, Escher, Bach: an Eternal Golden Braid',
+    author: 'Douglas Hofstadter'
+},
+{
+    title: 'The Beginning of Infinity, Explanations That Transform the World',
+    author: 'David Deutsch'
+},
+{
+    title: 'Zen and the Art of Motorcycle Maintenance',
+    author: 'Robert Pirsig'
+},
+{
+    title: 'Fooled by Randomness',
+    author: 'Nicholas Taleb'
+}];
+
+// I allow the constructor to take a seed to simplify testing.
+var book = new MongoBook(db, seed);
+
+describe('mongo-book', function() {
+
+    before(function(done) {
+        book.reset(done);
+    });
+
+    describe('#find', function() {
+        it('finds the matching books', function(done) {
+            book.find('the', function(err, books) {
+                expect(books.length).to.equal(2);
+                expect(books[0].title).to.match(/the/);
+                done();
+            });
+        });
+    });
+});
+```
+
+```javascript
+// lib/models/mongo-book.js
+'use strict';
+var debug = require('debug')('express-lab:mongo-book');
+
+
+function MongoBook(db, seed) {
+    this.db = db;
+    this.books = db.collection('books');
+    this.seed = seed;
+}
+
+MongoBook.prototype.find = function(filter, callback) {
+    var query = {
+        $or:[
+            {author: { $regex: filter, $options: 'i'}},
+            {title: { $regex: filter, $options: 'i'}}
+        ]
+    };
+    if (!filter) query = {};
+    this.books.find(query).toArray(function(err, books) {
+        callback(err, books);
+    });
+};
+
+MongoBook.prototype.reset = function(callback) {
+    var books = this.books;
+    var seed = this.seed;
+    books.drop(function(err, data) {
+        books.insert(seed, function(err, data) {
+            callback(err);
+        });
+    });
+};
+
+module.exports = MongoBook;
+```
 
