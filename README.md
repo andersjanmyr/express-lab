@@ -180,7 +180,7 @@ implementing the test. Copy the status test if you need a start.
 
 ### 6. Extract the book model
 
-Put it in `lib/model/book.js`. Return the list from a `find`-function.
+Put it in `lib/models/book.js`. Return the list from a `find`-function.
 
 Example:
 ```
@@ -195,7 +195,7 @@ module.exports = {
 };
 ```
 
-Don't forget to create test too. Put it in `test/model/book-test.js`.
+Don't forget to create test too. Put it in `test/models/book-test.js`.
 
 
 ### 7. Add a method for getting a book by id
@@ -274,11 +274,47 @@ books.find(filter, function(err, data) {
 });
 ```
 
+### 14. Middleware CORS
 
-### 14. Optional! Deploy the application to Heroku
+Browsers are prevented from making ajax calls to other servers than their
+origin. This is a security constraint that is implemented in the browsers.
+[Cross Origin Resource Sharing](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing),
+CORS, is a mechanism in which the server that is called allows the browser to make
+requests to it from a different host.
+
+CORS is implemented by sending an additional header `Access-Control-Allow-Origin`
+with the response to a resource. This informs the browser that it can make ajax
+requestst to it. We are going to implement this functionality is Express
+*middleware*.
+
+```javascript
+// Middleware example
+function middleware(req, res, next) {
+    // Middleware can:
+    // Do something with request, then call next()
+    // Do Something with response, then call next()
+    // Send a response, short-circuiting the stack, don't call next
+};
+```
+
+Add a test that verifies that the `Access-Control-Allow-Origin` header with
+the value `\*` is added to the response. The test should be modelled after the
+route tests but should `app.use(middleware)` instead.
+
+Implement the function called `corsMiddleware` that adds fulfills the above
+test. Don't forget to call `next()`.  Adding a header is done with
+`res.header(name, value)`.
+
+When this is done add the middleware to the stack in `app.js` with
+`app.use(middleware)`
+
+
+### 15. Optional! Deploy the application to Heroku
 
 If you want to you may deploy your application to Heroku. Follow their
 [instructions for getting started](https://devcenter.heroku.com/articles/getting-started-with-nodejs).
+
+
 
 ## Mongo DB
 
@@ -306,7 +342,7 @@ var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true});
 app.set('db', db);
 ```
 
-### 3. Create `lib/model/book-mongo.js`
+### 3. Create `lib/models/book-mongo.js`
 
 The model should take the database as a parameter.
 
@@ -343,5 +379,7 @@ module.exports = BookMongo;
 
 ### 4. Make all the tests pass with a real DB.
 
-Copy `test/model/book-test.js` to `test/model/book-mongo-test.js`
+Copy `test/models/book-test.js` to `test/models/book-mongo-test.js`
 and change it to test `book-mongo` instead.
+
+
