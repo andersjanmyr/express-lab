@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var express = require('express');
 var routes = require('../../lib/routes/status');
 
-app = express();
+var app = express();
 app.use('/status', routes);
 
 describe('GET /status', function() {
