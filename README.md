@@ -472,3 +472,11 @@ MongoBook.prototype.reset = function(callback) {
 module.exports = MongoBook;
 ```
 
+### 4. Add the MongoBook to the server
+
+* Change `book-router` to take a book model as a parameter.
+* Verify that the tests still run.
+* Change `app.js` to initiate Mongo and replace the `book`-model with
+  `mongo-book` model.
+* Verify that the tests run.
+* Verify that the server works.
