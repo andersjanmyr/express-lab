@@ -7,9 +7,9 @@
     "start": "node server.js",
     "watch": "nodemon server.js",
     "debug": "node --debug-brk server.js",
-    "test": "mocha test/**",
-    "test-debug": "mocha test/** --debug-brk",
-    "test-watch": "mocha test/** --watch"
+    "test": "mocha --recursive",
+    "test-debug": "mocha --recursive --debug-brk",
+    "test-watch": "mocha --recursive --watch"
   },
   "repository": {
     "type": "git",
