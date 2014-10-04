@@ -21,7 +21,7 @@ $ npm install
 $ npm test
 
 > express-lab@0.1.0 test /Users/andersjanmyr/Projects/express-lab
-> mocha test/**
+> mocha --recursive
 
 
   GET /status
