@@ -94,6 +94,34 @@ $ npm run test-debug # Start debugging the tests
 Open the link that is output by `node-inspector` in Chrome to debug.
 
 
+### Curl
+
+Curl is the web developer's best friend. It can be used to GET, POST, PUT, and
+DELETE resources. Here are some examples that will help you out.
+
+```
+# Examples
+
+# GET all books
+$ curl http://localhost:3000/books
+
+
+# GET single book
+$ curl http://localhost:3000/books/geb
+
+# POST book, remember Content-Type
+curl -H "Content-Type: application/json" -d '{"title":"Anti Fragile","author":"Nassim Taleb"}' http://localhost:3000/books
+
+
+# PUT book, remember Content-Type
+curl -X PUT -H "Content-Type: application/json" -d '{"title":"Anti Fragile","author":"Nassim Taleb"}' http://localhost:3000/books/anf
+
+# DELETE book
+curl -X DELETE http://localhost:3000/books/anf
+```
+
+
+
 ## Lab Instructions
 
 The lab structure looks like below.
