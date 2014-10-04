@@ -45,6 +45,9 @@ function start() {
 
 
 var server = http.createServer(app);
+var io = require('socket.io')(server);
+app.setupWebsockets(io);
+
 server.app = app;
 server.start = start;
 

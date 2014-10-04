@@ -480,3 +480,26 @@ module.exports = MongoBook;
   `mongo-book` model.
 * Verify that the tests run.
 * Verify that the server works.
+
+
+## WebSockets with Socket.IO
+
+### 1. Check out the branch called `websockets`.
+
+Then install new dependencies with `npm` and check out the new [root
+page](http://localhost:3000).
+
+```
+$ git checkout websockets
+$ npm install
+$ open http://localhost:3000
+```
+
+### Familiarize yourself with the files
+
+* `app.js` - Uses `express.static` to serve static files from `public`.
+* `public/index.html` - A basic HTML page with three scripts, `jquery`,
+  `socket.io`, and `main.js`.
+
+
+
