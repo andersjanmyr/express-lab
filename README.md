@@ -539,7 +539,7 @@ socket.emit('testEvent', {tapir: 'are cool!'});
 ### 5. Listen to the event on the client.
 
 Modify `public/js/main.js` to listen to the `testEvent`. Log to the console or
-add an message to the DOM with jQuery.
+use the provided function `showInfo` to display the event.
 
 ```
 socket.on('testEvent', function () {
