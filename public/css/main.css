@@ -54,10 +54,10 @@ li {
   border-radius: .2em;
 }
 li:nth-child(2n) {
-  background-color: lightblue;
+  background-color: rgba(144, 238, 144, 0.8);
 }
 li:nth-child(2n+1) {
-  background-color: lightgreen;
+  background-color: rgba(173, 216, 230, 0.8);
 }
 
 .title {
