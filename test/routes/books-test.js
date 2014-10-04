@@ -3,11 +3,13 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var express = require('express');
 var bodyParser = require('body-parser');
-var router = require('../../lib/routes/books');
+
+var booksRouter = require('../../lib/routes/books');
+var book = require('../../lib/models/book.js');
 
 var app = express();
 app.use(bodyParser.json());
-app.use('/books', router);
+app.use('/books', booksRouter(book));
 
 describe('GET /books?filter=fooled', function() {
     it('responds with matching books', function(done) {
