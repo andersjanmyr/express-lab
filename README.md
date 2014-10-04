@@ -21,7 +21,7 @@ $ npm install
 $ npm test
 
 > express-lab@0.1.0 test /Users/andersjanmyr/Projects/express-lab
-> mocha test/**
+> mocha --recursive
 
 
   GET /status
@@ -92,6 +92,34 @@ $ npm run test-debug # Start debugging the tests
 ```
 
 Open the link that is output by `node-inspector` in Chrome to debug.
+
+
+### Curl
+
+Curl is the web developer's best friend. It can be used to GET, POST, PUT, and
+DELETE resources. Here are some examples that will help you out.
+
+```
+# Examples
+
+# GET all books
+$ curl http://localhost:3000/books
+
+
+# GET single book
+$ curl http://localhost:3000/books/geb
+
+# POST book, remember Content-Type
+curl -H "Content-Type: application/json" -d '{"title":"Anti Fragile","author":"Nassim Taleb"}' http://localhost:3000/books
+
+
+# PUT book, remember Content-Type
+curl -X PUT -H "Content-Type: application/json" -d '{"title":"Anti Fragile","author":"Nassim Taleb"}' http://localhost:3000/books/anf
+
+# DELETE book
+curl -X DELETE http://localhost:3000/books/anf
+```
+
 
 
 ## Lab Instructions
@@ -480,3 +508,166 @@ module.exports = MongoBook;
   `mongo-book` model.
 * Verify that the tests run.
 * Verify that the server works.
+
+
+## WebSockets with Socket.IO
+
+### 1. Check out the branch called `websockets`.
+
+Then install new dependencies with `npm`, start the server in DEBUG watch mode and
+check out the new [root page](http://localhost:3000).
+
+```
+$ git checkout websockets
+$ npm install
+$ DEBUG=express-lab:* npm run watch
+$ open http://localhost:3000
+```
+
+### 2. Familiarize yourself with the files
+
+* `lib/app.js` - Uses `express.static` to serve static files from `public`.
+* `public/index.html` - A basic HTML page with three scripts, `jquery`,
+  `socket.io`, and `main.js`.
+* `server.js` - Hooks up socket.io to the existing connection.
+* `public/js/main.js` -  The client side Javascript, starts a websocket connection.
+
+Open a console in the browser and verify that a websocket connection is
+established with the server. You should see something like this:
+
+```
+Socket {io: Manager, nsp: "/", json: Socket, ids: 0, acks: Object…}
+Connected
+```
+
+### 3. Detect the connection on the server side
+
+In `app.js` is a function called `setupWebsockets(io)`. Setup a listener for
+detecting the connection attempt by the client.
+
+```
+// Listen to connection events
+io.on('connection', function(socket) {
+    debug('Connection established);
+});
+```
+
+Make sure the connection is detected by checking out the log.
+
+### 4. Send an event to the client with socke.emit
+
+This event must by sent from inside the connection callback, since this is
+where the socket is available.
+
+```
+// Send an event
+socket.emit('testEvent', {tapir: 'are cool!'});
+```
+
+### 5. Listen to the event on the client.
+
+Modify `public/js/main.js` to listen to the `testEvent`. Log to the console or
+use the provided function `showInfo` to display the event.
+
+```
+socket.on('testEvent', function () {
+    console.log('Connected');
+});
+```
+
+### 6. Change books into an EventEmitter
+
+```
+var EventEmitter = require("events").EventEmitter;
+var util = require('util');
+
+function Book() {
+  // Call the EventEmitter constructor
+  EventEmitter.call(this);
+...
+}
+// Set EventEmitter as Books's prototype
+util.inherits(Tapir, events.EventEmitter);
+```
+
+Add a test to verify that you can call `on` and `emit` on a book object.
+
+
+### 7. Change the method in Book to emit events
+
+You emit events with the `emit` function. Set up the following events:
+
+```
+// Emit the following events in the appropriate methods.
+this.emit('added', book);
+this.emit('removed', book);
+this.emit('updated', book);
+this.emit('error', error);
+```
+
+### 8. Listen to the Book events
+
+Set up listeners in `app.js` to listen to the book events and log them with
+`debug`. You listen with the `on` function.
+
+
+```
+book.on('added', function(book) {
+    debug('added', book);
+});
+...
+```
+
+Or you can setup all the listeners in a loop.
+
+```
+['added', 'removed', 'updated', 'error'].forEach(function(name) {
+  ...
+});
+```
+
+### 9. Send the events on to the client
+
+Send on the events to the client. Namespace the events with `book:`, to make it
+easy for the client to separate events from different models.
+
+```
+book.on('added', function(book) {
+    debug('added', book);
+    socket.emit('book:added', book);
+});
+```
+
+
+### 10. Listen to the events and add the new books to the #books `ul`
+
+Use the existing function `bookItem` to create the HTML to insert.
+
+```
+socket.on('book:added', function (book) {
+    console.log('book:added', book);
+    $('#books').append(bookItem(book));
+    $('#message').showInfo('Book added ' + book.title);
+});
+```
+
+
+### 11. Handle the rest of the events as appropriate.
+
+Use jQuery to update the list and give feedback with `showInfo`, and `showError`.
+
+```
+socket.on('book:removed', function(book) {
+    console.log('book:removed', book);
+    $('#book' + book.id).delete());
+});
+
+socket.on('book:updated', function(book) {
+    console.log('book:updated', book);
+    $('#book' + book.id).update());
+});
+
+socket.on('book:error', function(error) {
+    console.log('book:error', error);
+});
+```
