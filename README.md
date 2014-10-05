@@ -671,3 +671,11 @@ socket.on('book:error', function(error) {
     console.log('book:error', error);
 });
 ```
+
+### 12. Add client side functionality.
+
+* Add a form to `public/index.html` to allow you add new books.
+* Add Delete buttons to every book item to allow you to delete.
+* Add Edit button to every book item to populate the form.
+
+Useful `jQuery` methods are `ajax` and 'click`.
