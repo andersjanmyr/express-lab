@@ -4,9 +4,13 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 
 var Book = require('../../lib/models/book');
-var book = new Book();
+var book;
 
 describe('book', function() {
+
+    beforeEach(function() {
+        book = new Book();
+    });
 
     describe('#find', function() {
         it('finds the matching books', function(done) {
@@ -36,6 +40,15 @@ describe('book', function() {
                     expect(books.length).to.equal(len + 1);
                     done();
                 });
+            });
+        });
+
+        it('sends an added event with the book', function(done) {
+            book.on('added', function(b) {
+                expect(b.title).to.equal('Julius Ceasar');
+                done();
+            });
+            book.add({title: 'Julius Ceasar', author: 'Shakespeare'}, function() {
             });
         });
     });
@@ -74,6 +87,14 @@ describe('book', function() {
                 done();
             });
         });
+        it('sends a removed event with the book', function(done) {
+            book.on('removed', function(b) {
+                expect(b.title).to.equal('Fooled by Randomness');
+                done();
+            });
+            book.remove({id: 'fbr'}, function() {
+            });
+        });
     });
 
     describe('#update', function() {
@@ -100,9 +121,17 @@ describe('book', function() {
                 });
             });
         });
+        it('sends an updated event with the book', function(done) {
+            book.on('updated', function(b) {
+                expect(b.title).to.equal('Federal Bureau of Randomnes');
+                done();
+            });
+            book.update({id: 'fbr', title: 'Federal Bureau of Randomnes'}, function() {
+            });
+        });
     });
 
-    after(function() {
+    afterEach(function() {
         book.reset();
     });
 });
