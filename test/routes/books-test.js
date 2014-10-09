@@ -5,15 +5,20 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var booksRouter = require('../../lib/routes/books');
-var book = require('../../lib/models/book.js');
+var Book = require('../../lib/models/book.js');
+var book = new Book();
 
 var app = express();
 app.use(bodyParser.json());
 app.use('/books', booksRouter(book));
 
-describe('GET /books?filter=fooled', function() {
-    it('responds with matching books', function(done) {
-        request(app)
+describe('books', function() {
+    before(function() {
+        book.reset();
+    });
+    describe('GET /books?filter=fooled', function() {
+        it('responds with matching books', function(done) {
+            request(app)
             .get('/books?filter=fooled')
             .end(function(err, res){
                 if (err) throw err;
@@ -22,12 +27,12 @@ describe('GET /books?filter=fooled', function() {
                 expect(res.body.length).to.equal(1);
                 done();
             });
+        });
     });
-});
 
-describe('GET /books/geb', function() {
-    it('responds with matching book', function(done) {
-        request(app)
+    describe('GET /books/geb', function() {
+        it('responds with matching book', function(done) {
+            request(app)
             .get('/books/geb')
             .end(function(err, res){
                 if (err) throw err;
@@ -35,12 +40,12 @@ describe('GET /books/geb', function() {
                 expect(res.body.title).to.match(/Gödel/);
                 done();
             });
+        });
     });
-});
 
-describe('POST /books', function() {
-    it('adds the new book', function(done) {
-        request(app)
+    describe('POST /books', function() {
+        it('adds the new book', function(done) {
+            request(app)
             .post('/books')
             .send({author: 'fake', title: 'Fakebook swims!'})
             .end(function(err, res){
@@ -49,12 +54,12 @@ describe('POST /books', function() {
                 expect(res.body).to.equal('fas');
                 done();
             });
+        });
     });
-});
 
-describe('PUT /books/fbr', function() {
-    it('responds with matching book', function(done) {
-        request(app)
+    describe('PUT /books/fbr', function() {
+        it('responds with matching book', function(done) {
+            request(app)
             .put('/books/fbr')
             .send({title: 'Fakebook rocks!'})
             .end(function(err, res){
@@ -63,12 +68,12 @@ describe('PUT /books/fbr', function() {
                 expect(res.body.title).to.match(/Fakebook/);
                 done();
             });
+        });
     });
-});
 
-describe('DELETE /books/fbr', function() {
-    it('responds with matching book', function(done) {
-        request(app)
+    describe('DELETE /books/fbr', function() {
+        it('responds with matching book', function(done) {
+            request(app)
             .delete('/books/fbr')
             .end(function(err, res){
                 if (err) throw err;
@@ -76,6 +81,6 @@ describe('DELETE /books/fbr', function() {
                 expect(res.body.title).to.match(/Fakebook/);
                 done();
             });
+        });
     });
 });
-
