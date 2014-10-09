@@ -10,6 +10,8 @@ describe('book', function() {
 
     beforeEach(function() {
         book = new Book();
+        // Hook up a default error handler to avoid crash
+        book.on('error', function ignore() {});
     });
 
     describe('#find', function() {
@@ -51,6 +53,15 @@ describe('book', function() {
             book.add({title: 'Julius Ceasar', author: 'Shakespeare'}, function() {
             });
         });
+        it('gets an error event if the book title exists', function(done) {
+            book.on('error', function(error) {
+                expect(error).to.equal('Book not found, id: missing');
+                done();
+            });
+            book.remove({id: 'missing'}, function() {
+            });
+        });
+
     });
 
     describe('#remove', function() {
@@ -95,6 +106,15 @@ describe('book', function() {
             book.remove({id: 'fbr'}, function() {
             });
         });
+        it('gets an error event if the book is missing', function(done) {
+            book.on('error', function(error) {
+                expect(error).to.equal('Book not found, id: missing');
+                done();
+            });
+            book.remove({id: 'missing'}, function() {
+            });
+        });
+
     });
 
     describe('#update', function() {
@@ -127,6 +147,14 @@ describe('book', function() {
                 done();
             });
             book.update({id: 'fbr', title: 'Federal Bureau of Randomnes'}, function() {
+            });
+        });
+        it('gets an error event if the book is missing', function(done) {
+            book.on('error', function(error) {
+                expect(error).to.equal('Book not found, id: missing');
+                done();
+            });
+            book.update({id: 'missing', title: 'Not here'}, function() {
             });
         });
     });
