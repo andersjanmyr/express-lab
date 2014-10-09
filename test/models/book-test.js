@@ -4,9 +4,13 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 
 var Book = require('../../lib/models/book');
-var book = new Book();
+var book;
 
 describe('book', function() {
+
+    beforeEach(function() {
+        book = new Book();
+    });
 
     describe('#find', function() {
         it('finds the matching books', function(done) {
@@ -38,6 +42,7 @@ describe('book', function() {
                 });
             });
         });
+
     });
 
     describe('#remove', function() {
@@ -102,7 +107,7 @@ describe('book', function() {
         });
     });
 
-    after(function() {
+    afterEach(function() {
         book.reset();
     });
 });
