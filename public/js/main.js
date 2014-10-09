@@ -28,5 +28,8 @@ $(function() {
         console.log('Connected');
         showInfo('Connected');
     });
+    socket.on('testEvent', function(event) {
+        console.log(event);
+    });
 
 });
