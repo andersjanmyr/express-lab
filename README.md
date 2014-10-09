@@ -575,7 +575,7 @@ socket.on('testEvent', function () {
 });
 ```
 
-### 6. Change books into an EventEmitter
+### 6. Change `Book` into an EventEmitter
 
 ```
 var EventEmitter = require("events").EventEmitter;
@@ -586,8 +586,8 @@ function Book() {
   EventEmitter.call(this);
 ...
 }
-// Set EventEmitter as Books's prototype
-util.inherits(Tapir, events.EventEmitter);
+// Set EventEmitter as Book's prototype
+util.inherits(Book, events.EventEmitter);
 ```
 
 Add a test to verify that you can call `on` and `emit` on a book object.
