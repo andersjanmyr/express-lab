@@ -647,7 +647,7 @@ Use the existing function `bookItem` to create the HTML to insert.
 socket.on('book:added', function (book) {
     console.log('book:added', book);
     $('#books').append(bookItem(book));
-    $('#message').showInfo('Book added ' + book.title);
+    showInfo('Book added ' + book.title);
 });
 ```
 
@@ -659,12 +659,12 @@ Use jQuery to update the list and give feedback with `showInfo`, and `showError`
 ```
 socket.on('book:removed', function(book) {
     console.log('book:removed', book);
-    $('#book' + book.id).delete());
+    $('#book' + book.id).remove();
 });
 
 socket.on('book:updated', function(book) {
     console.log('book:updated', book);
-    $('#book' + book.id).update());
+    $('#book' + book.id); // You are on your own for update.
 });
 
 socket.on('book:error', function(error) {
