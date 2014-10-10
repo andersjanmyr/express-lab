@@ -28,8 +28,27 @@ $(function() {
         console.log('Connected');
         showInfo('Connected');
     });
-    socket.on('testEvent', function(event) {
-        console.log(event);
+
+    socket.on('book:error', function(error) {
+        console.log(error);
+        showError('Book ' + error);
     });
 
+    socket.on('book:added', function(b) {
+        console.log(event, b);
+        $('#books').append(bookItem(b));
+        showInfo('Book added ' + b.title);
+    });
+
+    socket.on('book:removed', function(b) {
+        console.log(b);
+        $('#book-' +b.id).remove();
+        showInfo('Book added ' + b.title);
+    });
+
+    socket.on('book:updated', function(b) {
+        console.log(event, b);
+        $('#book-' +b.id).remove();
+        showInfo('Book removed ' + b.title);
+    });
 });
