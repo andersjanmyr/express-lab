@@ -48,7 +48,7 @@ $(function() {
 
     socket.on('book:updated', function(b) {
         console.log(event, b);
-        $('#book-' +b.id).remove();
+        $('#book-' +b.id).replaceWith(bookItem(b));
         showInfo('Book removed ' + b.title);
     });
 });
