@@ -664,7 +664,7 @@ socket.on('book:removed', function(book) {
 
 socket.on('book:updated', function(book) {
     console.log('book:updated', book);
-    $('#book' + book.id); // You are on your own for update.
+    $('#book' + book.id).replaceWith(bookItem(book));
 });
 
 socket.on('book:error', function(error) {
