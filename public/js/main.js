@@ -33,11 +33,15 @@ $(function() {
 
     $('#form-clear').click(function(event) {
         event.preventDefault();
+        reset();
+    });
+
+    function reset() {
         $('.book').removeClass('editing');
         $('#form')[0].reset();
         $('#form-id').val('');
         $('#form-submit').val('Add book');
-    });
+    }
 
     $('#form').submit(function(event) {
         event.preventDefault();
@@ -51,10 +55,7 @@ $(function() {
             dataType: 'json',
             url: data.id ? '/books/' + data.id : '/books',
             data: JSON.stringify(data),
-            success: function() {
-                $('#form')[0].reset();
-                $('#form-id').val('');
-            }
+            success: reset
         });
     });
 
