@@ -20,6 +20,7 @@ $(function() {
     $('#books').on('click', '.edit', function(event) {
         event.preventDefault();
         var $book = $(this).parent('.book');
+        $book.addClass('editing');
         var id = $book.attr('id').replace('book-', '');
         var title = $book.find('.title').text();
         var author = $book.find('.author').text();
@@ -32,6 +33,7 @@ $(function() {
 
     $('#form-clear').click(function(event) {
         event.preventDefault();
+        $('.book').removeClass('editing');
         $('#form')[0].reset();
         $('#form-id').val('');
         $('#form-submit').val('Add book');
