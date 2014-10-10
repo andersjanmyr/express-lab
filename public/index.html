@@ -10,6 +10,12 @@
   <body>
     <div id='message'></div>
     <div id='content'>
+      <form id='form' action='/books' method='post'>
+        <input type='hidden' name='id'>
+        <label for='name'>Title</label><input name='title'>
+        <label for='author'>Author</label><input name='author'>
+        <input type='submit' name='submit'>
+      </form>
       <h1>Books</h1>
       <ul id="books">
       </ul>

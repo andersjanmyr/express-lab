@@ -8,11 +8,26 @@ $(function() {
     }
 
     $('#books').on('click', '.delete', function(event) {
-        event.preventDefault();
+        event.preventdefault();
         var id = $(this).parent('.book').attr('id').replace('book-', '');
         $.ajax({
             type: 'DELETE',
             url: '/books/' + id
+        });
+    });
+
+    $('#form').submit(function(event) {
+        event.preventDefault();
+        var data = {};
+        $(this).serializeArray().forEach(function(entry) {
+            data[entry.name] = entry.value;
+        });
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            url: '/books',
+            data: JSON.stringify(data)
         });
     });
 
