@@ -1,10 +1,20 @@
 $(function() {
     function bookItem(book) {
-        return '<li id="book-' + book.id + '">\n' +
+        return '<li id="book-' + book.id + '" class="book">\n' +
             '<div class="title">' + book.title +  '</div>\n' +
             '<div class="author">' + book.author +  '</div>\n' +
+            '<a href="#" class="delete">Delete</a>\n' +
             '</li>\n';
     }
+
+    $('#books').on('click', '.delete', function(event) {
+        event.preventDefault();
+        var id = $(this).parent('.book').attr('id').replace('book-', '');
+        $.ajax({
+            type: 'DELETE',
+            url: '/books/' + id
+        });
+    });
 
     function show(type, message) {
         $('#message')
@@ -51,4 +61,5 @@ $(function() {
         $('#book-' +b.id).replaceWith(bookItem(b));
         showInfo('Book removed ' + b.title);
     });
+
 });
