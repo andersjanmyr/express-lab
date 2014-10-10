@@ -659,12 +659,12 @@ Use jQuery to update the list and give feedback with `showInfo`, and `showError`
 ```
 socket.on('book:removed', function(book) {
     console.log('book:removed', book);
-    $('#book' + book.id).remove();
+    $('#book-' + book.id).remove();
 });
 
 socket.on('book:updated', function(book) {
     console.log('book:updated', book);
-    $('#book' + book.id).replaceWith(bookItem(book));
+    $('#book-' + book.id).replaceWith(bookItem(book));
 });
 
 socket.on('book:error', function(error) {
