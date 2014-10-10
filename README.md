@@ -587,7 +587,7 @@ function Book() {
 ...
 }
 // Set EventEmitter as Book's prototype
-util.inherits(Book, events.EventEmitter);
+util.inherits(Book, EventEmitter);
 ```
 
 Add a test to verify that you can call `on` and `emit` on a book object.
