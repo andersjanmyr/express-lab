@@ -73,6 +73,14 @@ li:nth-child(2n+1) {
   font-family: Baskerville, Garamond, "Times New Roman", serif;
 }
 
-.delete {
+a {
   color: white;
+}
+
+label {
+  font-size: 18pt;
+  margin-right: 5px;
+}
+input {
+  font-size: 18pt;
 }
