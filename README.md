@@ -6,7 +6,7 @@ learn how to:
 * Setup a Node environment for fast development, debugging and testing.
 * Structure your code in separate modules
 * Create an JSON API with `Express`
-* Write tests for the API, with `Mocha`, `supertest`, and `Chai`
+* Write tests for the API, with `Mocha`, `Supertest`, `Sinon.js` and `Chai`
 * Write Express middleware
 * Deploy the application to the Heroku cloud service
 * Save data into Mongo DB.
