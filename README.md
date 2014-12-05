@@ -12,8 +12,8 @@ learn how to:
 * Save data into Mongo DB.
 * Implement event notifications with an `EventEmitter`
 * Use web-sockets to send event to the server with `Socket.IO`
-* Write a single pages web application to communicate with the service via REST
-  and web-sockets
+* Write a single page web application, SPA, to communicate with the service via
+  REST and web-sockets
 
 
 
