@@ -25,6 +25,8 @@ learn how to:
 # Clone repository
 $ git clone https://github.com/andersjanmyr/express-lab.git
 ...
+# cd into project directory
+$ cd express-lab
 ```
 
 ```
