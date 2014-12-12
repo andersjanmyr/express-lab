@@ -22,6 +22,12 @@ learn how to:
 * [Install Node](http://nodejs.org/)
 
 ```
+# Clone repository
+$ git clone https://github.com/andersjanmyr/express-lab.git
+...
+```
+
+```
 # Install dependencies
 $ npm install
 ...
