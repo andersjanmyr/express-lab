@@ -1,10 +1,33 @@
 # Express Lab
 
-A lab for learning how to create a JSON API with Express.
+A lab for learning how to create a JSON API with Express. In the lab you will
+learn how to:
+
+* Setup a Node environment for fast development, debugging and testing.
+* Structure your code in separate modules
+* Create an JSON API with `Express`
+* Write tests for the API, with `Mocha`, `Supertest`, `Sinon.js` and `Chai`
+* Write Express middleware
+* Deploy the application to the Heroku cloud service
+* Save data into Mongo DB.
+* Implement event notifications with an `EventEmitter`
+* Use web-sockets to send event to the server with `Socket.IO`
+* Write a single page web application, SPA, to communicate with the service via
+  REST and web-sockets
+
+
 
 ## Installation
 
 * [Install Node](http://nodejs.org/)
+
+```
+# Clone repository
+$ git clone https://github.com/andersjanmyr/express-lab.git
+...
+# cd into project directory
+$ cd express-lab
+```
 
 ```
 # Install dependencies
