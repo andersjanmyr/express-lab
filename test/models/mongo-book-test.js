@@ -36,96 +36,27 @@ describe('mongo-book', function() {
 
     describe('#find', function() {
         it('finds the matching books', function(done) {
-            book.find('the', function(err, books) {
-                expect(books.length).to.equal(2);
-                expect(books[0].title).to.match(/the/);
-                done();
-            });
         });
     });
 
     describe('#add', function() {
-        var original;
-
-        before(function(done) {
-            book.find(null, function(err, books) {
-                original = books;
-                done();
-            });
-        });
-
         it('adds the book', function(done) {
-            var len = original.length;
-            book.add({title: 'Hamlet', author: 'Shakespeare'}, function(err, id) {
-                book.find(null, function(err, books) {
-                    expect(books.length).to.equal(len + 1);
-                    done();
-                });
-            });
         });
     });
 
     describe('#remove', function() {
-        var original, abook;
-
-        before(function(done) {
-            book.find(null, function(err, books) {
-                original = books;
-                abook = books[0];
-                done();
-            });
-        });
-
         it('removes the book by id', function(done) {
-            var len = original.length
-            book.remove(abook._id, function(err) {
-                book.find(null, function(err, books) {
-                    expect(books.length).to.equal(len - 1);
-                    done();
-                });
-            });
         });
         it('removes the book by book', function(done) {
-            var len = original.length
-            book.remove(abook, function(err) {
-                book.find(null, function(err, books) {
-                    expect(books.length).to.equal(len - 1);
-                    done();
-                });
-            });
         });
         it('calls back with error if book missing', function(done) {
-            book.remove({_id: 'missing'}, function(err) {
-                expect(err).to.equal('Book not found, id: missing');
-                done();
-            });
         });
     });
 
     describe('#update', function() {
-        var original, abook;
-
-        before(function(done) {
-            book.find(null, function(err, books) {
-                original = books;
-                abook = books[0];
-                done();
-            });
-        });
         it('calls back with error if book missing', function(done) {
-            book.update({_id: 'missing'}, function(err) {
-                expect(err).to.equal('Book not found, id: missing');
-                done();
-            });
         });
         it('updates the book', function(done) {
-            var len = original.length
-            book.update({_id: abook._id, title: 'Facebook rules!'}, function(err) {
-                book.findById(abook._id, function(err, book) {
-                    expect(book.title).to.equal('Facebook rules!');
-                    done();
-                });
-            });
         });
     });
 
