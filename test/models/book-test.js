@@ -3,7 +3,8 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 
-var book = require('../../lib/models/book');
+var Book = require('../../lib/models/book');
+var book = new Book();
 
 describe('book', function() {
 
