@@ -96,7 +96,7 @@ $(function() {
     socket.on('book:removed', function(b) {
         console.log(b);
         $('#book-' +b.id).remove();
-        showInfo('Book added ' + b.title);
+        showInfo('Book removed ' + b.title);
     });
 
     socket.on('book:updated', function(b) {
