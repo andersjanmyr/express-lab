@@ -384,14 +384,7 @@ Make sure `mongo` is started!
 $ npm install mongoskin --save
 ```
 
-### 2. Connect to a DB with mongoskin
-
-```
-// In server.js start() method
-var db = mongoskin.db('mongodb://@localhost:27017/express-lab-dev', {safe:true});
-```
-
-### 3. Create `lib/models/book-mongo.js`
+### 2. Create `lib/models/book-mongo.js`
 
 The model should take the database as a parameter.
 
@@ -408,7 +401,7 @@ BookMongo.prototype.find = function find(filter, callback) {
 module.exports = BookMongo;
 ```
 
-### 4. Make all the tests pass with a real DB.
+### 3. Make all the tests pass with a real DB.
 
 Copy `test/models/book-test.js` to `test/models/book-mongo-test.js`
 and change it to test `book-mongo` instead.
@@ -505,8 +498,15 @@ module.exports = MongoBook;
 
 ### 4. Add the MongoBook to the server
 
-* Change `app.js` to initiate Mongo and replace the `book`-model with
-  `mongo-book` model.
+Change `app.js` to initiate Mongo and replace the `book`-model with `mongo-book` model.
+
+```
+// In app.js
+var mongoskin = require('mongoskin');
+var db = mongoskin.db('mongodb://@localhost:27017/express-lab-dev', {safe:true});
+var book = new MongoBook(db);
+```
+
 * Verify that the tests run.
 * Verify that the server works.
 
