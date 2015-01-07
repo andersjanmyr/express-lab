@@ -10,6 +10,13 @@
   <body>
     <div id='message'></div>
     <div id='content'>
+      <form id='form' action='/books' method='post'>
+        <input type='hidden' name='id' id='form-id'>
+        <label for='name'>Title</label><input name='title' id='form-title'>
+        <label for='author'>Author</label><input name='author' id='form-author'>
+        <input type='submit' value='Add book' id='form-submit'>
+        <input type='reset' value='Clear' id='form-clear'>
+      </form>
       <h1>Books</h1>
       <ul id="books">
       </ul>
