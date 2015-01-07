@@ -1,10 +1,33 @@
 # Express Lab
 
-A lab for learning how to create a JSON API with Express.
+A lab for learning how to create a JSON API with Express. In the lab you will
+learn how to:
+
+* Setup a Node environment for fast development, debugging and testing.
+* Structure your code in separate modules
+* Create an JSON API with `Express`
+* Write tests for the API, with `Mocha`, `Supertest`, `Sinon.js` and `Chai`
+* Write Express middleware
+* Deploy the application to the Heroku cloud service
+* Save data into Mongo DB.
+* Implement event notifications with an `EventEmitter`
+* Use web-sockets to send event to the server with `Socket.IO`
+* Write a single page web application, SPA, to communicate with the service via
+  REST and web-sockets
+
+
 
 ## Installation
 
 * [Install Node](http://nodejs.org/)
+
+```
+# Clone repository
+$ git clone https://github.com/andersjanmyr/express-lab.git
+...
+# cd into project directory
+$ cd express-lab
+```
 
 ```
 # Install dependencies
@@ -365,9 +388,7 @@ $ npm install mongoskin --save
 
 ```
 // In server.js start() method
-var db = mongoskin.db('mongodb://@localhost:27017/express-lab-test', {safe:true});
-
-app.set('db', db);
+var db = mongoskin.db('mongodb://@localhost:27017/express-lab-dev', {safe:true});
 ```
 
 ### 3. Create `lib/models/book-mongo.js`
@@ -383,24 +404,6 @@ function BookMongo(db) {
 BookMongo.prototype.find = function find(filter, callback) {
 }
 ...
-
-module.exports = BookMongo;
-```
-Or,
-```
-// As a function that returns an object
-var db;
-function bookMongo(database) {
-  db = database;
-  return {
-    find: find,
-    ...
-  }
-}
-
-function find(filter, callback) {
-...
-}
 
 module.exports = BookMongo;
 ```
@@ -502,8 +505,6 @@ module.exports = MongoBook;
 
 ### 4. Add the MongoBook to the server
 
-* Change `book-router` to take a book model as a parameter.
-* Verify that the tests still run.
 * Change `app.js` to initiate Mongo and replace the `book`-model with
   `mongo-book` model.
 * Verify that the tests run.
@@ -554,7 +555,7 @@ io.on('connection', function(socket) {
 
 Make sure the connection is detected by checking out the log.
 
-### 4. Send an event to the client with socke.emit
+### 4. Send an event to the client with socket.emit
 
 This event must by sent from inside the connection callback, since this is
 where the socket is available.
@@ -575,7 +576,7 @@ socket.on('testEvent', function () {
 });
 ```
 
-### 6. Change books into an EventEmitter
+### 6. Change `Book` into an EventEmitter
 
 ```
 var EventEmitter = require("events").EventEmitter;
@@ -586,8 +587,8 @@ function Book() {
   EventEmitter.call(this);
 ...
 }
-// Set EventEmitter as Books's prototype
-util.inherits(Tapir, events.EventEmitter);
+// Set EventEmitter as Book's prototype
+util.inherits(Book, EventEmitter);
 ```
 
 Add a test to verify that you can call `on` and `emit` on a book object.
@@ -647,7 +648,7 @@ Use the existing function `bookItem` to create the HTML to insert.
 socket.on('book:added', function (book) {
     console.log('book:added', book);
     $('#books').append(bookItem(book));
-    $('#message').showInfo('Book added ' + book.title);
+    showInfo('Book added ' + book.title);
 });
 ```
 
@@ -659,12 +660,12 @@ Use jQuery to update the list and give feedback with `showInfo`, and `showError`
 ```
 socket.on('book:removed', function(book) {
     console.log('book:removed', book);
-    $('#book' + book.id).delete());
+    $('#book-' + book.id).remove();
 });
 
 socket.on('book:updated', function(book) {
     console.log('book:updated', book);
-    $('#book' + book.id).update());
+    $('#book-' + book.id).replaceWith(bookItem(book));
 });
 
 socket.on('book:error', function(error) {
