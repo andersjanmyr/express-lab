@@ -75,7 +75,7 @@ $(function() {
         show('error', message);
     }
 
-    var socket = io.connect('http://localhost');
+    var socket = io.connect();
     console.log(socket);
     socket.on('connect', function () {
         console.log('Connected');
